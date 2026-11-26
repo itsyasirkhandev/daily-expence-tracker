@@ -1,16 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useState, type ReactNode } from "react";
-import type { User } from "oidc-client-ts";
-import { AuthProvider, useAuth } from "react-oidc-context";
+import { useMemo, type ReactNode } from "react";
+import { useAuth } from "react-oidc-context";
 import { SpacetimeDBProvider } from "spacetimedb/react";
+import { AuthSessionProvider } from "@/components/auth-session-provider";
 import { publicConfig } from "@/lib/config";
 import { DbConnection, type ErrorContext } from "@/lib/module_bindings";
-
-export function onSigninCallback(user: User | void) {
-  // Redirect callbacks return a user; silent iframe callbacks do not.
-  if (user) window.location.replace("/");
-}
 
 /** Opens the SpacetimeDB connection only after SpacetimeAuth returns an ID token. */
 function SpacetimeConnection({ children }: { children: ReactNode }) {
@@ -39,34 +34,10 @@ function SpacetimeConnection({ children }: { children: ReactNode }) {
   );
 }
 
-/**
- * Browser-only providers. `oidc-client-ts` needs `window` and `sessionStorage`,
- * so nothing renders until after hydration.
- */
 export function AppProviders({ children, fallback }: { children: ReactNode; fallback: ReactNode }) {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
-  const oidc = useMemo(
-    () =>
-      mounted
-        ? {
-            authority: publicConfig.spacetimeAuthAuthority,
-            client_id: publicConfig.spacetimeAuthClientId,
-            redirect_uri: `${window.location.origin}/callback`,
-            post_logout_redirect_uri: window.location.origin,
-            scope: "openid profile email",
-            response_type: "code",
-            automaticSilentRenew: true,
-          }
-        : null,
-    [mounted],
-  );
-
-  if (!oidc) return <>{fallback}</>;
   return (
-    <AuthProvider {...oidc} onSigninCallback={onSigninCallback}>
+    <AuthSessionProvider fallback={fallback}>
       <SpacetimeConnection>{children}</SpacetimeConnection>
-    </AuthProvider>
+    </AuthSessionProvider>
   );
 }

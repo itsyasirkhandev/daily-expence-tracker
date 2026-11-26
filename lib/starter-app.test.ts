@@ -17,5 +17,6 @@ describe("authentication errors", () => {
     const html = renderToStaticMarkup(createElement(StarterApp));
     expect(html).toContain("Cancelled");
     expect(html).toContain("Try again");
+    expect(html).toContain('href="/login"');
   });
 });
