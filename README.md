@@ -39,7 +39,7 @@ If you already copied `.env.example` from the starter, update `NEXT_PUBLIC_SPACE
 1. Create or publish a module on Maincloud and enable SpacetimeAuth for it in the SpacetimeDB dashboard. In its identity provider settings, enable Google and follow the dashboard's provider setup. Create a public OIDC client.
 2. Register `http://localhost:5173/callback` and your production `https://YOUR_DOMAIN/callback` as redirect URIs; configure the corresponding logout URLs if required by the dashboard. Keep the local origin and port consistent with your dev server.
 3. Set `NEXT_PUBLIC_SPACETIMEAUTH_CLIENT_ID` in `.env.local` to the client ID. In `spacetimedb/src/auth-config.ts`, add the same public client ID to `SPACETIMEAUTH_CLIENT_IDS`, then republish the module. The empty list rejects every connection by design. Never commit a client secret.
-4. Restart the dev server after changing public values. Sign in using the hosted SpacetimeAuth page; Google appears when configured on the provider side. SpacetimeDB verifies tokens and the module checks issuer and audience.
+4. Restart the dev server after changing public values. Open `/login` and select **Sign in with Google**. On the hosted SpacetimeAuth page, choose Google. The `/callback` route finishes sign-in and returns you to the home page. SpacetimeDB verifies tokens and the module checks issuer and audience.
 
 The local SpacetimeDB server can use the same public SpacetimeAuth client, provided the redirect URI is registered. A real Google/OIDC flow requires the external setup above; no hosted service or provider is created by this repository.
 

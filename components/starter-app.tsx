@@ -8,6 +8,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { isAuthConfigured } from "@/lib/config";
 
+const loginLinkClass =
+  "h-auto min-h-11 whitespace-normal focus-visible:ring-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-solid focus-visible:outline-orange-800 motion-reduce:transition-none motion-reduce:active:translate-y-0";
+
 function StatusCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <Card>
@@ -19,30 +22,33 @@ function StatusCard({ title, children }: { title: string; children: React.ReactN
   );
 }
 
-function SetupRequired() {
-  return (
-    <StatusCard title="Finish setup to enable sign-in">
-      Set <code>NEXT_PUBLIC_SPACETIMEAUTH_CLIENT_ID</code> in <code>.env.local</code> and add the
-      same client ID to <code>spacetimedb/src/auth-config.ts</code>. See the README for the
-      SpacetimeAuth and Google provider steps.
-    </StatusCard>
-  );
-}
-
-function SignInCard({ onSignIn }: { onSignIn: () => void }) {
+function SignInCard() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Sign in to join the realtime guestbook</CardTitle>
+        <CardTitle>
+          {isAuthConfigured
+            ? "Sign in to join the realtime guestbook"
+            : "Finish setup to enable sign-in"}
+        </CardTitle>
         <CardDescription>
-          SpacetimeAuth hosts the login page. Enable Google under Identity Providers in your
-          SpacetimeAuth project to offer Google sign-up.
+          {isAuthConfigured ? (
+            "Use your Google account to continue."
+          ) : (
+            <>
+              Set <code>NEXT_PUBLIC_SPACETIMEAUTH_CLIENT_ID</code> in <code>.env.local</code> and
+              add the same client ID to <code>spacetimedb/src/auth-config.ts</code>. See the README
+              for the SpacetimeAuth and Google provider steps.
+            </>
+          )}
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Button onClick={onSignIn}>
-          <LogIn aria-hidden="true" />
-          Continue with SpacetimeAuth
+        <Button asChild className={loginLinkClass}>
+          <a href="/login">
+            <LogIn aria-hidden="true" />
+            Go to sign-in
+          </a>
         </Button>
       </CardContent>
     </Card>
@@ -94,20 +100,22 @@ function SessionGate() {
           <CardDescription>{auth.error.message}</CardDescription>
         </CardHeader>
         <CardContent>
-          <Button onClick={() => window.location.assign("/")}>Try again</Button>
+          <Button asChild className={loginLinkClass}>
+            <a href="/login">Try again</a>
+          </Button>
         </CardContent>
       </Card>
     );
   }
   if (!hasSession(auth)) {
-    return <SignInCard onSignIn={() => void auth.signinRedirect()} />;
+    return <SignInCard />;
   }
 
   return <SignedInSession user={auth.user} onSignOut={() => void auth.signoutRedirect()} />;
 }
 
 export function StarterApp() {
-  if (!isAuthConfigured) return <SetupRequired />;
+  if (!isAuthConfigured) return <SignInCard />;
   return (
     <AppProviders fallback={<StatusCard title="Loading…">Starting the app.</StatusCard>}>
       <SessionGate />

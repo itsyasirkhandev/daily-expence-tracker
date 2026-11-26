@@ -1,6 +1,6 @@
 import type { User } from "oidc-client-ts";
 import { afterEach, describe, expect, it, vi } from "vite-plus/test";
-import { onSigninCallback } from "@/components/app-providers";
+import { onSigninCallback } from "@/components/auth-session-provider";
 
 describe("sign-in callback", () => {
   afterEach(() => vi.unstubAllGlobals());
