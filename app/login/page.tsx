@@ -18,7 +18,15 @@ export default function Login() {
       <Card className="w-full max-w-md gap-0 border py-0 ring-0 shadow-md shadow-orange-950/5">
         <CardHeader className="gap-0 px-6 pt-8 sm:px-8 sm:pt-10">
           <div className="flex items-center gap-3">
-            <Image className="shrink-0" src="/icon.svg" width={40} height={40} alt="" unoptimized />
+            <Image
+              className="shrink-0"
+              src="/icon.svg"
+              width={40}
+              height={40}
+              alt=""
+              loading="eager"
+              unoptimized
+            />
             <div>
               <p className="text-base leading-tight font-semibold">{site.name}</p>
               <p className="mt-1 text-sm leading-snug text-neutral-700">Daily expense tracker</p>
