@@ -13,8 +13,8 @@ A TypeScript starter for a realtime guestbook using **vinext** (the Next.js API 
 
 ## Prerequisites
 
-- Node.js 22.18+ on the 22.x line, 24.11+ on the 24.x line, or 26+ (Node 24 recommended), pnpm 10.34.9, and the [SpacetimeDB CLI](https://spacetimedb.com/docs/quickstarts/typescript/).
-- A [SpacetimeDB Maincloud](https://spacetimedb.com/) account and a SpacetimeAuth project/client with Google enabled for interactive sign-in. SpacetimeAuth is beta.
+- Node.js 22.18+ on the 22.x line, 24.11+ on the 24.x line, or 26+ (Node 24 recommended), pnpm 10.34.9, and the [SpacetimeDB CLI](https://spacetimedb.com/install) (2.16.1, matching the SDK).
+- For Google sign-in only: a [SpacetimeDB Maincloud](https://spacetimedb.com/) account and a SpacetimeAuth project with a public client and Google enabled. No cloud account is needed to publish and query the module locally.
 - A Cloudflare account with Workers and R2 enabled for deployment. Local development uses a simulated R2 bucket.
 
 ## Quick start
@@ -26,10 +26,13 @@ cp .env.example .env.local
 pnpm spacetime:start
 # Back in this terminal:
 pnpm spacetime:publish:local
+curl -fsS http://127.0.0.1:3000/v1/database/daily-expense-tracker/identity
 pnpm dev
 ```
 
-Open http://localhost:5173. The landing page works without credentials, but the guestbook intentionally stays locked until authentication is configured.
+The identity endpoint returns a database ID when the local publish succeeded. Open http://localhost:5173 for the landing page. SQL queries and guestbook connections are rejected until authentication is configured.
+
+If you already copied `.env.example` from the starter, update `NEXT_PUBLIC_SPACETIMEDB_DB_NAME` and `NEXT_PUBLIC_SPACETIMEDB_URI` in `.env.local`. Publishing under the new name does not migrate data from the old local database. If you publish with a server-issued local identity, keep its CLI login: replacing it can lock you out of databases owned by that identity.
 
 ### Configure SpacetimeAuth and Google
 
@@ -47,8 +50,8 @@ All variables below are **public build-time values** embedded in browser and Wor
 | Variable                              | Default                             | Purpose                                                                |
 | ------------------------------------- | ----------------------------------- | ---------------------------------------------------------------------- |
 | `NEXT_PUBLIC_SITE_URL`                | `http://localhost:5173`             | Canonical, Open Graph and sitemap origin                               |
-| `NEXT_PUBLIC_SPACETIMEDB_URI`         | `ws://localhost:3000`               | WebSocket endpoint; use your Maincloud `wss://` endpoint in production |
-| `NEXT_PUBLIC_SPACETIMEDB_DB_NAME`     | `vinext-starter`                    | Published database name or identity                                    |
+| `NEXT_PUBLIC_SPACETIMEDB_URI`         | `ws://127.0.0.1:3000`               | WebSocket endpoint; use your Maincloud `wss://` endpoint in production |
+| `NEXT_PUBLIC_SPACETIMEDB_DB_NAME`     | `daily-expense-tracker`             | Published database name or identity                                    |
 | `NEXT_PUBLIC_SPACETIMEAUTH_AUTHORITY` | `https://auth.spacetimedb.com/oidc` | OIDC issuer and JWKS base URL                                          |
 | `NEXT_PUBLIC_SPACETIMEAUTH_CLIENT_ID` | empty                               | Public OIDC client ID                                                  |
 

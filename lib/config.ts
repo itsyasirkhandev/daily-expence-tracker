@@ -17,8 +17,8 @@ export type PublicConfig = typeof PublicConfig.Type;
 
 export const publicConfig: PublicConfig = Schema.decodeUnknownSync(PublicConfig)({
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:5173",
-  spacetimedbUri: process.env.NEXT_PUBLIC_SPACETIMEDB_URI ?? "ws://localhost:3000",
-  spacetimedbDatabase: process.env.NEXT_PUBLIC_SPACETIMEDB_DB_NAME ?? "vinext-starter",
+  spacetimedbUri: process.env.NEXT_PUBLIC_SPACETIMEDB_URI ?? "ws://127.0.0.1:3000",
+  spacetimedbDatabase: process.env.NEXT_PUBLIC_SPACETIMEDB_DB_NAME ?? "daily-expense-tracker",
   spacetimeAuthAuthority:
     process.env.NEXT_PUBLIC_SPACETIMEAUTH_AUTHORITY ?? "https://auth.spacetimedb.com/oidc",
   spacetimeAuthClientId: process.env.NEXT_PUBLIC_SPACETIMEAUTH_CLIENT_ID ?? "",
