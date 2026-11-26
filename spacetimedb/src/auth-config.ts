@@ -16,4 +16,4 @@ export const SPACETIMEAUTH_ISSUER = "https://auth.spacetimedb.com/oidc";
  *
  * Left empty, every connection is rejected (fail closed).
  */
-export const SPACETIMEAUTH_CLIENT_IDS: readonly string[] = [];
+export const SPACETIMEAUTH_CLIENT_IDS: readonly string[] = ["client_0354LLaR88lUi3bSgb3zyx"];

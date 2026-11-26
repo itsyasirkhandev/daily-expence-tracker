@@ -2,7 +2,7 @@ import { bindings, defineConfig, defineWorker } from "cf/config";
 
 export default defineConfig({
   worker: defineWorker({
-    name: "vinext-cloudflare-spacetimedb-starter",
+    name: "rozana-expence",
     entrypoint: "vinext/server/fetch-handler",
     compatibilityDate: "2026-11-24",
     compatibilityFlags: ["nodejs_compat"],
@@ -15,7 +15,7 @@ export default defineConfig({
       ASSETS: bindings.assets(),
       // R2 bucket for user uploads. Local dev uses a simulated bucket;
       // `pnpm run deploy` provisions the bucket if it does not exist.
-      UPLOADS: bindings.r2({ name: "vinext-spacetimedb-starter-uploads" }),
+      UPLOADS: bindings.r2({ name: "rozana-expence-uploads" }),
     },
   }),
 });

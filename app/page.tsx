@@ -34,9 +34,7 @@ export default function Home() {
         <p className="text-sm font-semibold tracking-wide text-orange-600 uppercase">
           Open-source starter template
         </p>
-        <h1 className="text-4xl leading-tight font-semibold sm:text-5xl">
-          Realtime apps on Cloudflare Workers with vinext and SpacetimeDB
-        </h1>
+        <h1 className="text-4xl leading-tight font-semibold sm:text-5xl">Rozana Expence</h1>
         <p className="max-w-2xl text-lg leading-8 text-muted-foreground">{site.description}</p>
         <p>
           <a className="font-medium underline underline-offset-4" href={site.repository}>
