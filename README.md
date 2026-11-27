@@ -64,6 +64,17 @@ All variables below are **public build-time values** embedded in browser and Wor
 3. Configure the Maincloud endpoint and public values in the deployment build environment. Update the module auth config, then publish with `pnpm spacetime:publish` (change the database name in `package.json` if needed). Set the same database name in the public config and register production callback URLs.
 4. Run `pnpm run deploy`. Set the actual production origin in `NEXT_PUBLIC_SITE_URL` before building/deploying.
 
+For Cloudflare Workers Builds, set `NEXT_PUBLIC_SPACETIMEAUTH_CLIENT_ID`,
+`NEXT_PUBLIC_SPACETIMEDB_DB_NAME`, and `NEXT_PUBLIC_SPACETIMEDB_URI` under
+**Build variables and secrets** before building. If these variables already
+exist as plain-text variables under the Worker's **Variables & Secrets**, use
+exactly the same values. `cloudflare.config.ts` includes the supplied build
+values as Worker bindings to avoid the missing-binding conflict for these
+variables. Build variables and runtime variables are separate; configuring
+only the latter does not configure the client bundle. Rebuild after changes.
+Configure preview build values separately for the intended preview database
+and authentication client.
+
 The Worker serves the app and `/api/uploads`; SpacetimeDB is a separate service. `/api/health` reports whether the R2 binding and client ID are configured, not the health of external services. Provisioning and deployment require your own accounts and have not been performed by this template.
 
 ## Commands

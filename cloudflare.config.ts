@@ -16,6 +16,16 @@ export default defineConfig({
       // R2 bucket for user uploads. Local dev uses a simulated bucket;
       // `pnpm run deploy` provisions the bucket if it does not exist.
       UPLOADS: bindings.r2({ name: "rozana-expence-uploads" }),
+      // Mirror public build values in Worker configuration when supplied.
+      NEXT_PUBLIC_SPACETIMEAUTH_CLIENT_ID: process.env.NEXT_PUBLIC_SPACETIMEAUTH_CLIENT_ID
+        ? bindings.text(process.env.NEXT_PUBLIC_SPACETIMEAUTH_CLIENT_ID)
+        : undefined,
+      NEXT_PUBLIC_SPACETIMEDB_DB_NAME: process.env.NEXT_PUBLIC_SPACETIMEDB_DB_NAME
+        ? bindings.text(process.env.NEXT_PUBLIC_SPACETIMEDB_DB_NAME)
+        : undefined,
+      NEXT_PUBLIC_SPACETIMEDB_URI: process.env.NEXT_PUBLIC_SPACETIMEDB_URI
+        ? bindings.text(process.env.NEXT_PUBLIC_SPACETIMEDB_URI)
+        : undefined,
     },
   }),
 });
