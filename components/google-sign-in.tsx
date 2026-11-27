@@ -31,7 +31,15 @@ function SignInControl({
         onClick={busy ? undefined : onSignIn}
         className="h-auto min-h-11 w-full gap-3 rounded-md border-[#747775] bg-white px-3 py-2 whitespace-normal text-[#1f1f1f] hover:bg-neutral-50 hover:text-[#1f1f1f] focus-visible:ring-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-solid focus-visible:outline-orange-800 disabled:border-neutral-300 disabled:text-neutral-600 disabled:opacity-100 aria-disabled:cursor-wait motion-reduce:transition-none motion-reduce:active:translate-y-0"
       >
-        <Image className="shrink-0" src="/google-g.svg" width={20} height={20} alt="" unoptimized />
+        <Image
+          className="shrink-0"
+          src="/google-g.svg"
+          width={20}
+          height={20}
+          alt=""
+          loading="eager"
+          unoptimized
+        />
         Sign in with Google
       </Button>
       <p
@@ -85,7 +93,11 @@ export function GoogleSignIn() {
   }
 
   return (
-    <AuthSessionProvider fallback={<SignInControl message="Checking your session…" />}>
+    <AuthSessionProvider
+      fallback={
+        <SignInControl message="If sign-in doesn’t load, check that JavaScript is enabled, then reload the page." />
+      }
+    >
       <SessionSignIn />
     </AuthSessionProvider>
   );
