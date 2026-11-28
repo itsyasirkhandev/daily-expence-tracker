@@ -1,1 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#f38020"/><path d="M9 10l7 12 7-12" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Rozana Expence icon</title><desc id="desc">An abstract open loop and three repeating day strokes.</desc>
+  <g id="mark"><path id="loop-leading" d="M156 43 H90 C62 43 44 61 44 89 V130" fill="none" stroke="#282828" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="loop-return" d="M100 213 H166 C194 213 212 195 212 167 V126" fill="none" stroke="#282828" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="day-one" d="M78 90 H123" fill="none" stroke="#D46716" stroke-width="20" stroke-linecap="round"/>
+    <path id="day-two" d="M100 128 H156" fill="none" stroke="#D46716" stroke-width="20" stroke-linecap="round"/>
+    <path id="day-three" d="M133 166 H178" fill="none" stroke="#D46716" stroke-width="20" stroke-linecap="round"/></g>
+</svg>
