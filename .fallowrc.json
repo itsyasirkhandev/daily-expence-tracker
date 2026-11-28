@@ -9,7 +9,5 @@
     "cloudflare.config.ts",
     "components/ui/**"
   ],
-  "ignorePatterns": ["lib/module_bindings/**"],
-  "ignoreDependencies": ["next"],
-  "ignoreBinaries": ["spacetime"]
+  "ignoreDependencies": ["next"]
 }

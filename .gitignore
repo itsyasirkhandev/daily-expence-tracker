@@ -6,7 +6,6 @@ next-env.d.ts
 /dist/
 .vinext/
 .cloudflare/
-spacetimedb/dist/
 *.tmp.mjs
 
 # Fallow analysis cache
