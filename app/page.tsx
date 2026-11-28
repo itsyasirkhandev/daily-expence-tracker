@@ -1,13 +1,9 @@
-import { StarterApp } from "@/components/starter-app";
+import { Guestbook } from "@/components/guestbook";
 import { site } from "@/lib/site";
 import { serializeJsonForHtml } from "@/lib/json-ld";
 
 const stack = [
   ["vinext", "Next.js App Router API on Vite, deployed to Cloudflare Workers"],
-  ["SpacetimeDB", "Realtime database and TypeScript server module (reducers + tables)"],
-  ["SpacetimeAuth", "Managed OIDC sign-in; enable Google as an identity provider"],
-  ["Cloudflare R2", "Authenticated file uploads served from a Worker route"],
-  ["Effect", "Typed errors and Schema validation in Worker routes and the browser"],
   ["shadcn/ui + Tailwind", "Accessible components styled with Tailwind CSS v4"],
 ] as const;
 
@@ -45,9 +41,9 @@ export default function Home() {
 
       <section aria-labelledby="demo-heading" className="flex flex-col gap-4">
         <h2 id="demo-heading" className="text-2xl font-semibold">
-          Live demo
+          Guestbook demo
         </h2>
-        <StarterApp />
+        <Guestbook />
       </section>
 
       <section aria-labelledby="stack-heading" className="flex flex-col gap-4">
